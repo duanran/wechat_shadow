@@ -1,0 +1,4 @@
+#Sat Jun 01 18:18:25 CST 2019
+base.0=/Users/apple/wechat_shadow/build/app/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
