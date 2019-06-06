@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'mine.dart';
 import 'Login/Login.dart';
+import 'Fav/fav_page.dart';
+import 'Search/search_page.dart';
 
 class Index extends StatefulWidget{
   @override
@@ -25,8 +27,11 @@ class _indexState extends State<Index> with TickerProviderStateMixin{
 
     _navigationViews = <NavigationIconView>[
       new NavigationIconView(icon: new Icon(Icons.assessment),title: new Text("首页"),vsync: this),
-      new NavigationIconView(icon: new Icon(Icons.perm_identity),title: new Text("我的"),vsync: this),
-      new NavigationIconView(icon: new Icon(Icons.pregnant_woman),title: new Text("登录"),vsync: this),
+      new NavigationIconView(icon: new Icon(Icons.favorite_border),title: new Text("我的收藏"),vsync: this),
+//      new NavigationIconView(icon: new Icon(Icons.perm_identity),title: new Text("我的"),vsync: this),
+//      new NavigationIconView(icon: new Icon(Icons.pregnant_woman),title: new Text("登录"),vsync: this),
+      new NavigationIconView(icon: new Icon(Icons.search),title: new Text("搜索"),vsync: this),
+
 
     ];
 
@@ -36,8 +41,10 @@ class _indexState extends State<Index> with TickerProviderStateMixin{
 
     _pageList = <StatefulWidget>[
         new HomePage(),
-        new MinePage(),
-        new Login(),
+        new FavPage(),
+        new SearchPage(),
+//        new MinePage(),
+//        new Login(),
     ];
 
     _currentPage = _pageList[_currentIndex];

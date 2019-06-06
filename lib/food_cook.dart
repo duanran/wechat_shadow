@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'models/food_detail_model.dart';
-
+import 'dart:convert';
+import 'file_mgr.dart';
 class FoodCook extends StatefulWidget{
   FoodCook({Key key,@required this.selFoodDetail}) : super(key : key);
   final FoodDetail selFoodDetail;
@@ -14,11 +14,17 @@ class FoodCook extends StatefulWidget{
 class FoodCookState extends State<FoodCook>{
 
   List<String> materialList;
+  List<Map<String,dynamic>> alreadSavedList;
+
+
+  bool alredySaved = false;
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     materialList = new List();
     List<String> tmpMaterial = new List();
 
@@ -40,6 +46,8 @@ class FoodCookState extends State<FoodCook>{
     tmpMaterial = str.split(",");
     tmpMaterial.removeLast();
     materialList = tmpMaterial;
+    _getFavData();
+
 
 
   }
@@ -49,6 +57,17 @@ class FoodCookState extends State<FoodCook>{
     // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(
+                 alredySaved ? Icons.favorite : Icons.favorite_border,
+                color: alredySaved ? Colors.red : null,
+              ),
+              onPressed:(){
+            print("点击收藏按钮");
+            _getFavClick();
+          })
+        ],
         title: new Text("详细步骤"),
       ),
       body: ListView(
@@ -60,6 +79,114 @@ class FoodCookState extends State<FoodCook>{
         ],
       ),
     );
+  }
+
+
+  _getFavData(){
+    String key = "fav";
+    bool tmp = false;
+    Future <List<Map<String,dynamic>>> favMapList = file_mgr.shareins.readListFromKey(key);
+
+    favMapList.then((List<Map<String,dynamic>> dataList){
+      if (dataList == null){
+        alreadSavedList = new List();
+        tmp = false;
+      }
+      else{
+        alreadSavedList = dataList;
+        for (var map in dataList){
+          FoodDetail saveDetail = FoodDetail.fromJson(map);
+          if (saveDetail.id == widget.selFoodDetail.id){
+            tmp = true;
+            break;
+          }
+        };
+        setState(() {
+          alredySaved = tmp;
+        });
+      }
+
+    });
+
+  }
+
+
+  _getFavClick(){
+    String key = "fav";
+    Future <List<Map<String,dynamic>>> favMapList = file_mgr.shareins.readListFromKey(key);
+    bool tmp = false;
+    favMapList.then((List<Map<String,dynamic>> dataList){
+     if (dataList == null){
+       alreadSavedList = new List();
+       Map<String,dynamic>data =  widget.selFoodDetail.toJson();
+       alreadSavedList.add(data);
+       file_mgr.shareins.saveListWithKey(key, alreadSavedList);
+       tmp = true;
+     }
+     else{
+       bool updateDetail = false;
+       alreadSavedList = dataList;
+       for (var map in dataList){
+         FoodDetail saveDetail = FoodDetail.fromJson(map);
+         if (saveDetail.id == widget.selFoodDetail.id){
+           updateDetail = true;
+           alreadSavedList.remove(map);
+           tmp = false;
+           break;
+         }
+       };
+
+       if (updateDetail == false){
+         Map<String,dynamic>data =  widget.selFoodDetail.toJson();
+         alreadSavedList.add(data);
+         file_mgr.shareins.saveListWithKey(key, alreadSavedList);
+         tmp = true;
+       }
+       else{
+         file_mgr.shareins.saveListWithKey(key, alreadSavedList);
+       }
+
+
+     }
+     setState(() {
+       alredySaved = tmp;
+     });
+
+
+
+
+    });
+
+
+
+
+
+
+//    String mStr = mJson.toString();
+//
+//    print("mStr=$mStr");
+//    print("mJson=$mJson");
+//
+//    FoodDetail d = FoodDetail.fromJson(mJson);
+//    String name = d.title;
+//
+//
+//  String test = jsonEncode(widget.selFoodDetail);
+//
+//
+//
+////    print("dynamicListOfInts=$dynamicListOfInts");
+//
+//    print("test=$test");
+//
+//    Map<String, dynamic> m = jsonDecode(test);
+//
+//
+//    FoodDetail nModel = FoodDetail.fromJson(m);
+//    String mtitle = nModel.title;
+//    print("mtitle=$mtitle");
+
+
   }
 
 
