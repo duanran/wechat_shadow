@@ -36,7 +36,15 @@ class HttpApi{
          Map<String,dynamic> resultDic = res.data["result"];
          return resultDic;
       }
+    }
 
+
+    Future<Map<String,dynamic>> searchDataWithName(String name,String pn,String rn) async{
+      Response res = await dio.get("/query.php?menu=$name&pn=$pn&rn=$rn&key=$appkey");
+      if(isSuccess(res)){
+        Map<String,dynamic> resultDic = res.data["result"];
+        return resultDic;
+      }
     }
 
 
