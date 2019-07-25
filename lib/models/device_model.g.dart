@@ -9,10 +9,10 @@ part of 'device_model.dart';
 deviceModel _$deviceModelFromJson(Map<String, dynamic> json) {
   return deviceModel(
       id: json['id'] as int,
-      user_id: json['user_id'] as String,
+      user_id: json['user_id'] as int,
       title: json['title'] as String,
-      cid: json['cid'] as int,
-      can_renew: json['can_renew'] as bool,
+      cid: json['cid'] as String,
+      can_renew: json['can_renew'] as int,
       device_type: json['device_type'] as int,
       remain_time: json['remain_time'] as int,
       screen_image_uri: json['screen_image_uri'] as String,

@@ -26,11 +26,12 @@ class _indexState extends State<Index> with TickerProviderStateMixin{
     super.initState();
 
     _navigationViews = <NavigationIconView>[
-      new NavigationIconView(icon: new Icon(Icons.assessment),title: new Text("首页"),vsync: this),
-      new NavigationIconView(icon: new Icon(Icons.favorite_border),title: new Text("我的收藏"),vsync: this),
-//      new NavigationIconView(icon: new Icon(Icons.perm_identity),title: new Text("我的"),vsync: this),
-//      new NavigationIconView(icon: new Icon(Icons.pregnant_woman),title: new Text("登录"),vsync: this),
-      new NavigationIconView(icon: new Icon(Icons.search),title: new Text("搜索"),vsync: this),
+//      new NavigationIconView(icon: new Icon(Icons.assessment),title: new Text("首页"),vsync: this),
+//      new NavigationIconView(icon: new Icon(Icons.favorite_border),title: new Text("我的收藏"),vsync: this),
+      new NavigationIconView(icon: new Icon(Icons.pregnant_woman),title: new Text("登录"),vsync: this),
+      new NavigationIconView(icon: new Icon(Icons.perm_identity),title: new Text("我的"),vsync: this),
+
+//      new NavigationIconView(icon: new Icon(Icons.search),title: new Text("搜索"),vsync: this),
 
 
     ];
@@ -40,11 +41,11 @@ class _indexState extends State<Index> with TickerProviderStateMixin{
     }
 
     _pageList = <StatefulWidget>[
-        new HomePage(),
-        new FavPage(),
-        new SearchPage(),
-//        new MinePage(),
-//        new Login(),
+//        new HomePage(),
+//        new FavPage(),
+//        new SearchPage(),
+      new Login(),
+      new MinePage(),
     ];
 
     _currentPage = _pageList[_currentIndex];

@@ -22,6 +22,9 @@ dependencies:
   dio: ^2.0.0
   json_annotation: ^2.0.0
   path_provider: ^0.4.1
+  pointycastle: ^1.0.0
+#  cipher2: 0.3.5
+  flutter_swiper : ^1.1.5
 
 
 dev_dependencies:
@@ -84,7 +87,14 @@ flutter:
     - assets/light@2x.png
     - assets/tran@3x.png
     - assets/xin@2x.png
-
+    - assets/logo-lager.png
+    - assets/buy.png
+    - assets/vip@2x.png
+    - assets/Gvip@2x.png
+    - assets/base.png
+    - assets/fire@2x.png
+    - assets/phonebg@2x.png
+    - assets/hu@2x.png
 
   #  - images/a_dot_ham.jpeg
 

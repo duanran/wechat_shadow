@@ -14,7 +14,7 @@ FoodDetail _$FoodDetailFromJson(Map<String, dynamic> json) {
       imtro: json['imtro'] as String,
       ingredients: json['ingredients'] as String,
       burden: json['burden'] as String,
-      albums: json['albums'] as List<dynamic>,
+      albums: json['albums'] as List,
       steps: (json['steps'] as List)
           ?.map((e) => e as Map<String, dynamic>)
           ?.toList());
